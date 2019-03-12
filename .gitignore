@@ -1,104 +1,81 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+# OS
+# ===========
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
 
-# C extensions
-*.so
+# Node and related ecosystem
+# ==========================
+.nodemonignore
+.sass-cache/
+node_modules/
+public/lib/
+app/tests/coverage/
+.bower-*/
+.idea/
+coverage/
+.coveralls.yml
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+# MEAN.js app and assets
+# ======================
+public/dist/
+uploads
+modules/users/client/img/profile/uploads
+config/env/local.js
+config/env/local-*.js
+*.pem
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+# Compiled less and sass files
+# ============================
+modules/*/client/scss/*.css
+modules/*/client/less/*.css
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Ignoring MEAN.JS's gh-pages branch for documenation
+_site/
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
+# General
+# =======
 *.log
-local_settings.py
-db.sqlite3
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.tmp
+*.bak
+*.swp
+logs/
+build/
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Sublime editor
+# ==============
+.sublime-project
+*.sublime-project
+*.sublime-workspace
 
-# Scrapy stuff:
-.scrapy
+# Eclipse project files
+# =====================
+.project
+.settings/
+.*.md.html
+.metadata
+*~.nib
+local.properties
 
-# Sphinx documentation
-docs/_build/
+# IntelliJ
+# ========
+*.iml
 
-# PyBuilder
-target/
+# Cloud9 IDE
+# =========
+.c9/
+data/
+mongod
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
+# Visual Studio
+# =========
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
