@@ -2,7 +2,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark danger-color">
 
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" style="color:white;" [RouterLink]="['/home']">DSProject</a></mdb-navbar-brand>
+    <mdb-navbar-brand><a class="navbar-brand" style="color:white;" [routerLink]="['/home']">DSProject</a></mdb-navbar-brand>
 
     <!-- Collapsible content -->
     <links>
@@ -10,13 +10,13 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active" routerLinkActive="active">
-                <a class="nav-link waves-light" [RouterLink]="['/home']" [RouterActive] mdbWavesEffect>Home</a>
+                <a class="nav-link waves-light" [routerLink]="['/home']" [RouterActive] mdbWavesEffect>Home</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link waves-light" mdbWavesEffect>Movies</a>
+                <a class="nav-link waves-light" [routerLink]="['/movies']" mdbWavesEffect>Movies</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link waves-light" mdbWavesEffect>TV Shows</a>
+                <a class="nav-link waves-light" [routerLink]="['/tvshows']" mdbWavesEffect>TV Shows</a>
             </li>
 
             <!-- Dropdown -->
@@ -24,12 +24,12 @@
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
                 Account</a>
                 <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect [RouterLink]="['/home']">Profile</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect [RouterLink]="['/home']">Disconnect</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/profile']">Profile</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/home']">Disconnect</a>
                 </div>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link waves-light" mdbWavesEffect>Log In</a>
+                <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Log In</a>
             </li>
         </ul>
         <!-- Links -->
