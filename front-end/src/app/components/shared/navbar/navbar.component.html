@@ -1,0 +1,47 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark danger-color">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" style="color:white;" [RouterLink]="['/home']">DSProject</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" routerLinkActive="active">
+                <a class="nav-link waves-light" [RouterLink]="['/home']" [RouterActive] mdbWavesEffect>Home</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light" mdbWavesEffect>Movies</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light" mdbWavesEffect>TV Shows</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                Account</a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect [RouterLink]="['/home']">Profile</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect [RouterLink]="['/home']">Disconnect</a>
+                </div>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link waves-light" mdbWavesEffect>Log In</a>
+            </li>
+        </ul>
+        <!-- Links -->
+
+<!-- Search form -->
+        <form class="form-inline waves-light" mdbWavesEffect>
+            <div class="md-form my-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            </div>
+        </form>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
