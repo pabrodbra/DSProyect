@@ -13,7 +13,7 @@ const route = require('./routes/route');
 const port = 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/entertainmentminer');
+mongoose.connect('mongodb://localhost:27017/entertainmentminer', { useNewUrlParser: true });
 
 mongoose.connection.on('connected', ()=>{
     console.log('Succesfully connnected to database mongodb @ 27017')

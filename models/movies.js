@@ -1,18 +1,46 @@
 const mongoose = require('mongoose');
 
-const ContactSchema = mongoose.Schema({
-    first_name: {
+const MovieSchema = mongoose.Schema({
+    title: {
         type: String,
         required: true
     },
-    last_name:{
+    year:{
         type: String,
         required: true
     },
-    phone:{
+    genres:{
+        type: [String],
+        required: true
+    },
+    ratings:{
+        type: [String],
+        required: true
+    },
+    duration:{
+        type: String,
+        required: true
+    },
+    releaseDate:{
+        type: String,
+        required: true
+    },
+    storyline:{
+        type: String,
+        required: true
+    },
+    actors:{
+        type: [String],
+        required: true
+    },
+    imdbRating:{
+        type: String,
+        required: true
+    },
+    posterurl:{
         type: String,
         required: true
     }
 })
 
-const Contact = module.exports = mongoose.model('Contact', ContactSchema)
+const Movie = module.exports = mongoose.model('Movie', MovieSchema, 'imdbmovies')
