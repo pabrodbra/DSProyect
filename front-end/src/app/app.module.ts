@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Componentes
 import { AppComponent } from './app.component';
@@ -32,6 +33,8 @@ import { APP_ROUTING } from './app.routes';
     BrowserModule,
     MDBBootstrapModule.forRoot(),
     APP_ROUTING,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
