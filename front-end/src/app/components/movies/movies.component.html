@@ -1,3 +1,19 @@
-<p>
-  movies works!
-</p>
+<h1 style="text-align:center;"> Movies </h1>
+<hr>
+
+<div class="container">
+  <div class="card-columns">
+    <div class="card" *ngFor="let movie of movies; let i = index">
+      
+      <img class="card-img-top" [src]="movie.posterurl" [alt]="movie.title">
+      <div class="card-body">
+        <h4 class="card-title"> {{ movie.title }} </h4>
+        <!--
+                <a [routerLink]="['/heroe', i]" class="btn btn-outline-primary"> Ver más </a>
+            -->
+        <button (click)="seeMovie(i)" type="button" class="btn btn-outline-primary btn-block"> Ver más</button>
+
+      </div>
+    </div>
+  </div>
+</div>
