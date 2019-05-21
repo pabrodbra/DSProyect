@@ -21,6 +21,10 @@ import { MoviesService } from './services/movies.service';
 //Rutas
 import { APP_ROUTING } from './app.routes';
 
+//PiPES
+import { UrlInvalidPipe } from './pipes/urlinvalid.pipe';
+import { MoviePageComponent } from './components/movie-page/movie-page.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { APP_ROUTING } from './app.routes';
     ProfileComponent,
     LoginComponent,
     SignupComponent,
+    UrlInvalidPipe,
+    MoviePageComponent
   ],
   imports: [
     BrowserModule,

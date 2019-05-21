@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-movies',
@@ -10,13 +12,17 @@ export class MoviesComponent implements OnInit {
 
   movies = [];
 
-  constructor(private _moviesServ:MoviesService) { }
+  constructor(private _moviesServ: MoviesService, private _router: Router) { }
 
   ngOnInit() {
-    this._moviesServ.getMovies().subscribe( (datos) => {
-      this.movies = datos;
-      console.log(datos);
-    });
+    console.log(this._moviesServ.movies.length);
+    if (this._moviesServ.movies.length == 0) {
+      this._moviesServ.getMoviesDB().subscribe((datos) => {
+        this.movies = datos;
+      });
+    }else{
+      this.movies = this._moviesServ.getMovies();
+    }
   }
 
 }
