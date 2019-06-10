@@ -1,0 +1,38 @@
+<div class="container mt-5 mb-5">
+  <mdb-card>
+    <mdb-card-header>
+      <h2>{{movie.title}} ( {{movie.year}} )</h2>
+    </mdb-card-header>
+    <div class="container mt-2" style="height: 500px; width: 300px;">
+      <img class="card-img-top card" style="height: 480px; width: 300px;" [src]="movie.posterurl" [alt]="movie.title">
+    </div>
+    <mdb-card-body>
+      <mdb-card-title>
+        <h5>Storyline</h5>
+        <hr>
+      </mdb-card-title>
+      <mdb-card-text>{{movie.storyline}}</mdb-card-text>
+      <mdb-card-title>
+        <h5>Cast</h5>
+        <hr>
+      </mdb-card-title>
+      <mdb-card-text>{{movie.actors}}</mdb-card-text>
+      <mdb-card-title>
+        <h5>Genres</h5>
+        <hr>
+      </mdb-card-title>
+      <mdb-card-text>{{movie.genres}}</mdb-card-text>
+      <mdb-card-title>
+        <h5>Duration</h5>
+        <hr>
+      </mdb-card-title>
+      <mdb-card-text>{{movie.duration}}</mdb-card-text>
+      <mdb-card-title>
+        <h5>Release date</h5>
+        <hr>
+      </mdb-card-title>
+      <mdb-card-text>{{movie.releaseDate}}</mdb-card-text>
+      <a [routerLink]="['/movies']">Go back</a>
+    </mdb-card-body>
+  </mdb-card>
+</div>

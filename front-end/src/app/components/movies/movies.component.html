@@ -1,3 +1,16 @@
-<p>
-  movies works!
-</p>
+<h1 style="text-align:center;"> Movies </h1>
+<hr>
+
+<div class="container">
+  <div class="card-columns">
+    <div class="card" *ngFor="let movie of movies; let i = index">
+      
+      <img class="card-img-top" [src]="movie.posterurl" [alt]="movie.title">
+
+      <div class="card-body">
+        <p class="h6"> {{ movie.title }} </p>
+        <a [routerLink]="['/movie', movie._id]" mdbBtn  gradient="purple" rounded="true" mdbWavesEffect> See more</a>
+      </div>
+    </div>
+  </div>
+</div>
