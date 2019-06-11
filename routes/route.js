@@ -116,6 +116,81 @@ router.get('/searchMovies', (req, res, next)=>{
     })
 });
 
+
+/*#########################
+########## NEO4J ##########
+#########################*/
+
+const neo4j = require('neo4j-driver').v1;
+const driver = new neo4j.driver("bolt://localhost:7687", neo4j.auth.basic("neo4j", "123"))
+const session = driver.session(neo4j.session.READ);
+
+// Get all actors
+router.get('/neo4j/actors', (req, res)=>{
+    var cypher = "MATCH (people:Person) RETURN people.name AS name"
+
+    session.run(cypher)
+        .then(result => {
+            console.log(result.records.length);
+
+            res.json(result.records.map(record => record.get("name")))
+        })
+        .then(() => session.close());
+    //res.send('Retrieving movie list');
+
+});
+
+// Get coactors
+router.get('/neo4j/coactors/:name', (req, res)=>{
+
+    let name = req.params.name
+    var cypher = "MATCH (p:Person {name:'" + name + "'})-[:ACTED_IN]->(m)<-[:ACTED_IN]-(coActors) RETURN coActors.name AS name, m.title AS title"
+
+    session.run(cypher)
+        .then(result => {
+            console.log(result.records.length);
+
+            res.json(result.records.map(record => {return ({"name" : record.get("name"), "movie" : record.get("title") }) }))
+        })
+        .then(() => session.close());
+    //res.send('Retrieving movie list');
+
+});
+
+// Get coactors
+router.get('/neo4j/directedactor/:name', (req, res)=>{
+
+    let name = req.params.name
+    var cypher = "MATCH (tom:Person {name:'" + name + "'})-[:ACTED_IN]->(m)<-[:DIRECTED]-(director) RETURN director.name AS name, m.title AS title"
+
+    session.run(cypher)
+        .then(result => {
+            console.log(result.records.length);
+
+            res.json(result.records.map(record => {return ({"name" : record.get("name"), "movie" : record.get("title") }) }))
+        })
+        .then(() => session.close());
+    //res.send('Retrieving movie list');
+
+});
+
+// Get shortest path between two actors
+router.get('/neo4j/actors_path/:name1/:name2', (req, res)=>{
+    let name1 = req.params.name1;
+    let name2 = req.params.name2;
+    var cypher ="MATCH p=shortestPath( (p1:Person {name:'" + name1 + "'})-[*]-(p2:Person {name:'" + name2 + "'}) ) RETURN p";
+
+    session.run(cypher)
+        .then(result => {
+            console.log(result.records);
+
+            res.json(result.records.map(record => record.get("p")))
+        })
+        .then(() => session.close());
+    //res.send('Retrieving movie list');
+
+});
+
 // http://excellencenodejsblog.com/mongoose-aggregation-count-group-match-project/
 
 var match_pipeline = [
