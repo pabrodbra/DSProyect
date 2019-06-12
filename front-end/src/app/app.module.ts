@@ -7,13 +7,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 //Componentes
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { MoviesComponent } from './components/movies/movies.component';
-import { TvshowsComponent } from './components/tvshows/tvshows.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/log/login/login.component';
 import { SignupComponent } from './components/log/signup/signup.component';
+import { ActorsComponent } from './components/actors/actors.component';
 
 //Servicios
 import { MoviesService } from './services/movies.service';
@@ -26,18 +25,18 @@ import { UrlInvalidPipe } from './pipes/urlinvalid.pipe';
 import { MoviePageComponent } from './components/movie-page/movie-page.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NavbarComponent,
     MoviesComponent,
-    TvshowsComponent,
     ProfileComponent,
     LoginComponent,
     SignupComponent,
     UrlInvalidPipe,
-    MoviePageComponent
+    MoviePageComponent,
+    ActorsComponent
   ],
   imports: [
     BrowserModule,

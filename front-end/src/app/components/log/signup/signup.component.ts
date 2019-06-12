@@ -54,6 +54,7 @@ export class SignupComponent implements OnInit {
       'password': new FormControl('', [
         Validators.required,
         Validators.minLength(5),
+        Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$"),
         this.noVacio
       ]),
       'repassReg': new FormControl()
@@ -69,8 +70,8 @@ export class SignupComponent implements OnInit {
     */
     this.forma.controls['repassReg'].setValidators([
       Validators.required,
-      this.noVacio
-      //this.coinciden.bind(this) //Se utiliza para vincular "this" en el contexto de la función y poder acceder a "this.forma" desde coinciden
+      this.noVacio,
+      this.coinciden.bind(this) //Se utiliza para vincular "this" en el contexto de la función y poder acceder a "this.forma" desde coinciden
     ])
 
     //this.forma.setValue(this.usuario); De esta forma se pueden dar valores por defecto a cada campo.
@@ -105,7 +106,8 @@ export class SignupComponent implements OnInit {
   }
 
   coinciden(control: FormControl): { [s: string]: boolean } {
-    if (control.value !== this.forma.controls['password'].value) { //Es válido porque antes de llamar a la función vinculamos this con this usando bind
+    if (control.value !== this.forma.controls['password'].value) { 
+      //Es válido porque antes de llamar a la función vinculamos this con this usando bind
       return {                    //En caso contrario no funcionaría al no detectar el contexto adecuado
         nocoindicen: true
       }
