@@ -19,6 +19,7 @@
   "dependencies": {
     "angular-bootstrap-md": "^7.4.2",
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^4.1.0",
     "chart.js": "^2.5.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",

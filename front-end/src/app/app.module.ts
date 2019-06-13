@@ -16,6 +16,7 @@ import { ActorsComponent } from './components/actors/actors.component';
 
 //Servicios
 import { MoviesService } from './services/movies.service';
+import { LogService } from './services/log.service';
 
 //Rutas
 import { APP_ROUTING } from './app.routes';
@@ -47,7 +48,8 @@ import { MoviePageComponent } from './components/movie-page/movie-page.component
     HttpClientModule
   ],
   providers: [
-    MoviesService
+    MoviesService,
+    LogService
   ],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]

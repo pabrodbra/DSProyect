@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AsyncValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
-//import { LogService } from '../../../services/log.service';
+import { User } from '../../../interfaces/user.interfaces';
+import { LogService } from '../../../services/log.service';
 
 @Component({
   selector: 'app-signup',
@@ -18,10 +19,10 @@ export class SignupComponent implements OnInit {
   //Variables
   forma: FormGroup;
 
-  usuario = {
-    Nombre: null,
-    Correo: null,
-    Hash: null
+  user:User = {
+    email: null,
+    name: null,
+    password: null
   }
 
 
@@ -32,7 +33,7 @@ export class SignupComponent implements OnInit {
   }
 
   //Constructor
-  constructor( private _router: Router) {
+  constructor( private _router: Router, private _logService:LogService) {
 
     this.forma = new FormGroup({ //Pueden anidarse FormGroups dentro de otros FormGroups en caso de disponer de campos compuestos
       'nombre': new FormControl('', [
@@ -79,20 +80,23 @@ export class SignupComponent implements OnInit {
 
   //Función a la que se llama una vez el formulario ha sido validado
   registrar() {
-    this.usuario = {
-      Nombre: this.forma.controls['nombre'].value.trim(),
-      Correo: this.forma.controls['email'].value.trim(),
-      Hash: this.forma.controls['password'].value.trim()
+    this.user = {
+      name: this.forma.controls['nombre'].value.trim(),
+      email: this.forma.controls['email'].value.trim(),
+      //password: this.forma.controls['password'].value.trim()
+      
     }
-    console.log(this.usuario);
+    console.log(this.user);
 
-    // this._logService.nuevoUsuario(this.usuario)
-    //   .subscribe((respuesta: Response) => {
-    //     if (respuesta.ok) {
-    //       this._router.navigate(['/login']);
-    //     }
-    //   }
-    //   );
+    this._logService.addUser(this.user)
+      .subscribe((resp) => {
+        if (resp.ok) {
+          this._router.navigate(['/login']);
+        }else{
+          console.log("Error al añadir al usuario");
+        }
+      }
+      );
   }
 
   //Validaciones
