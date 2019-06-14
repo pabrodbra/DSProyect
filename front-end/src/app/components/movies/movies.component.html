@@ -3,14 +3,17 @@
 
 <div class="container">
   <div class="card-columns">
-    <div class="card" *ngFor="let movie of movies; let i = index">
+    <div class="card" *ngFor="let movie of movies;">
       
       <img class="card-img-top" [src]="movie.posterurl" [alt]="movie.title">
 
       <div class="card-body">
         <p class="h6"> {{ movie.title }} </p>
-        <a [routerLink]="['/movie', movie._id]" mdbBtn  gradient="purple" rounded="true" mdbWavesEffect> See more</a>
+        <div class="row">
+            <a [routerLink]="['/movie', movie._id]" mdbBtn  gradient="purple" rounded="true" class="rounded" mdbWavesEffect>More</a>
+            <a class="btn peach-gradient rounded" (click)="addLike(movie._id,movie.title)">Like</a>
+        </div>
       </div>
-    </div>
+    </div> 
   </div>
 </div>

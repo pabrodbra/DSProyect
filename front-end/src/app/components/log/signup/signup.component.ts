@@ -19,7 +19,7 @@ export class SignupComponent implements OnInit {
   //Variables
   forma: FormGroup;
 
-  user:User = {
+  user: User = {
     email: null,
     name: null,
     password: null
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
   }
 
   //Constructor
-  constructor( private _router: Router, private _logService:LogService) {
+  constructor(private _router: Router, private _logService: LogService) {
 
     this.forma = new FormGroup({ //Pueden anidarse FormGroups dentro de otros FormGroups en caso de disponer de campos compuestos
       'nombre': new FormControl('', [
@@ -83,8 +83,8 @@ export class SignupComponent implements OnInit {
     this.user = {
       name: this.forma.controls['nombre'].value.trim(),
       email: this.forma.controls['email'].value.trim(),
-      //password: this.forma.controls['password'].value.trim()
-      
+      password: this.forma.controls['password'].value.trim()
+
     }
     console.log(this.user);
 
@@ -92,7 +92,7 @@ export class SignupComponent implements OnInit {
       .subscribe((resp) => {
         if (resp.ok) {
           this._router.navigate(['/login']);
-        }else{
+        } else {
           console.log("Error al añadir al usuario");
         }
       }
@@ -110,7 +110,7 @@ export class SignupComponent implements OnInit {
   }
 
   coinciden(control: FormControl): { [s: string]: boolean } {
-    if (control.value !== this.forma.controls['password'].value) { 
+    if (control.value !== this.forma.controls['password'].value) {
       //Es válido porque antes de llamar a la función vinculamos this con this usando bind
       return {                    //En caso contrario no funcionaría al no detectar el contexto adecuado
         nocoindicen: true
@@ -119,7 +119,7 @@ export class SignupComponent implements OnInit {
     return null;
   }
 
-  existeEmail(control: FormControl): Promise<ValidationErrors | null > {
+  existeEmail(control: FormControl): Promise<ValidationErrors | null> {
     return null;
     // return new Promise((resolve, reject) => {
     //

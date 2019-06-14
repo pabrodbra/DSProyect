@@ -22,6 +22,7 @@
             class="form-control-feedback">
             El campo no puede estar vacío.
         </div>
+        <div class="text-danger form-control-feedback" *ngIf="!correcto"> El correo o la contraseña son incorrectos.</div>
 
         <!-- Sign in button -->
         <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!form.valid">Sign in</button>

@@ -25,4 +25,12 @@ export class MoviesComponent implements OnInit {
     }
   }
 
+  addLike(id:String,movie:String){
+    let chain = id + ":" + movie;
+    console.log(chain);
+    this._moviesServ.addLike(chain).subscribe((resp) => {
+      console.log(resp);
+    });
+  }
+
 }

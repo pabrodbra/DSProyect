@@ -138,6 +138,18 @@ router.post('/adduser', (req, res) => {
         });
 })
 
+router.post('/updateuser', (req, res) => {
+    const query = 'UPDATE user SET name = ?, password = ? WHERE email = ?';
+    console.log(req.body);
+    const params = [req.body.name, req.body.password, req.body.email];
+    // Set the prepare flag in the query options
+    client.execute(query, params, { prepare: true })
+        .then(result => {
+            console.log('Row updated in cluster');
+            res.json(result);
+        });
+})
+
 router.get('/users', (req, res) => {
     const query = 'SELECT * FROM users.user';
     // Set the prepare flag in the query options
@@ -145,6 +157,35 @@ router.get('/users', (req, res) => {
         .then(result => res.json(result));
 })
 
+router.post('/login', (req,res) => {
+    const query = "SELECT * FROM users.user WHERE email = ?";
+    const params = [req.body.email];
+    client.execute(query, params, { prepare:true })
+        .then(result => {
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        })
+})
+
+router.post('/getlikes', (req,res) => {
+    const query = "SELECT likes FROM users.user WHERE email = ?";
+    const params = [req.body.email];
+    client.execute(query, params, { prepare:true })
+        .then(result => {
+            console.log(result.rows[0]);
+            res.json(result.rows[0]);
+        })
+})
+
+router.post('/updatelike', (req,res) => {
+    const query = "UPDATE user SET likes = likes + ? WHERE email = ?";
+    const params = [ [req.body.movie], req.body.email];
+    client.execute(query, params, { prepare:true })
+        .then(result => {
+            console.log(result);
+            res.json(result);
+        })
+})
 /*#########################
 ########## NEO4J ##########
 #########################*/

@@ -1,8 +1,9 @@
 import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-//import { LogService } from '../../../services/log.service';
+import { LogService } from '../../../services/log.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { User } from '../../../interfaces/user.interfaces';
 
 @Component({
   selector: 'app-login',
@@ -21,19 +22,19 @@ export class LoginComponent implements OnInit {
   correcto: boolean;
   subscription: Subscription;
 
-  datos = {
-    Nombre: null,
-    Correo: null,
-    Hash: null
+  user: User = {
+    name: null,
+    email: null,
+    password: null
   }
 
   ngOnInit() {
     // if (this._logService.sesionValida()) {
     //   this._router.navigate(['/home']);
     // }
-    // this.subscription = this._logService.logObservable.subscribe(valor => {
-    //   this.correcto = valor;
-    // });
+    this.subscription = this.logService.logObservable.subscribe(valor => {
+      this.correcto = valor;
+    });
   }
 
   ngOnDestroy() {
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
     //this.subscription.unsubscribe();
   }
 
-  constructor(private _router: Router, private ref: ChangeDetectorRef) {
+  constructor(private _router: Router, private ref: ChangeDetectorRef, private logService: LogService) {
 
     this.form = new FormGroup({
       'email': new FormControl('', [
@@ -58,23 +59,29 @@ export class LoginComponent implements OnInit {
   }
 
   logearse() {
-    this.datos = {
-      Nombre: null,
-      Correo: this.form.controls['email'].value,
-      Hash: this.form.controls['password'].value
+    this.user = {
+      name: null,
+      email: this.form.controls['email'].value,
+      password: this.form.controls['password'].value
     }
 
-    console.log(this.datos);
+    console.log(this.user);
 
-    // this._logService.conectarse(this.datos)
-    //   .subscribe(resp => {
-    //     this._router.navigate(['/home']);
-    //   },
-    //     error => {
-    //       this._logService.logObservable.next(false);
-    //       console.log(error);
-    //     }
-    //   );
+    this.logService.login(this.user)
+      .subscribe(resp => {
+        console.log(resp.body);
+        if (resp.body != null && resp.body.password == this.user.password) {
+          this.logService.crearSesion(resp.body);
+          this._router.navigate(['/profile']);
+        } else {
+          this.logService.logObservable.next(false);
+        }
+      },
+        error => {
+          this.logService.logObservable.next(false);
+          console.log(error);
+        }
+      );
   }
 
   //Validaciones

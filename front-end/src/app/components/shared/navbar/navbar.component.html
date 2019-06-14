@@ -15,18 +15,14 @@
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link waves-light" [routerLink]="['/actors']" mdbWavesEffect>Actors</a>
             </li>
-
-            <!-- Dropdown -->
-            <li class="nav-item dropdown" dropdown>
-                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-                Account</a>
-                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/profile']">Profile</a>
-                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/home']">Disconnect</a>
-                </div>
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="sesionValida()"  class="nav-link waves-light" mdbWavesEffect [routerLink]="['/profile']">Profile</a>
             </li>
             <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Log In</a>
+                <a *ngIf="sesionValida()"  class="nav-link waves-light" mdbWavesEffect (click)="desconectar()">Disconnect</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a *ngIf="!sesionValida()" class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Log In</a>
             </li>
         </ul>
         <!-- Links -->

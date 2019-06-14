@@ -1,3 +1,71 @@
-<p>
-  profile works!
-</p>
+<div class="container mt-5" style="width:600px;">
+  <form class="text-center border border-light p-5" [formGroup]="forma" (ngSubmit)="updateinfo()">
+
+    <p class="h4 mb-4">Personal Information</p>
+
+    <input type="text" class="form-control mb-3" formControlName="nombre">
+    <!-- Errores de validación -->
+    <div *ngIf="forma.controls['nombre'].errors?.minlength" class="form-control-feedback mb-2">
+      Longitud mínima necesaria {{ forma.controls['nombre'].errors.minlength.requiredLength }}.
+    </div>
+    <div *ngIf="forma.controls['nombre'].errors?.novacio && !forma.controls['nombre'].pristine"
+      class="form-control-feedback">
+      El campo no puede estar vacío.
+    </div>
+
+    <!-- Email -->
+    <input type="email" class="form-control mb-3 disabled" id="email" formControlName="email">
+    <!-- Errores de validación -->
+    <div *ngIf="forma.controls['email'].errors?.email" class="form-control-feedback">
+      El formato no es correcto.
+    </div>
+    <div *ngIf="forma.controls['email'].errors?.novacio && !forma.controls['email'].pristine"
+      class="form-control-feedback">
+      El campo no puede estar vacío.
+    </div>
+    <div *ngIf="forma.controls['email'].errors?.existeEmail && !forma.controls['email'].pristine"
+      class="form-control-feedback">
+      Ya existe una cuenta con esta dirección de correo electrónico.
+    </div>
+
+    <!-- Password -->
+    <input type="password" class="form-control mb-3" formControlName="password">
+    <!-- Errores de validación -->
+    <div *ngIf="forma.controls['password'].errors?.pattern && !forma.controls['password'].pristine"
+      class="form-control-feedback">
+      La contraseña debe contener al menos una minúscula, una mayúscula, un número, un carácter especial y una longitud
+      de al menos 5 caracteres.
+    </div>
+    <div *ngIf="forma.controls['password'].errors?.novacio && !forma.controls['password'].pristine"
+      class="form-control-feedback">
+      El campo no puede estar vacío.
+    </div>
+
+    <!-- Repass -->
+    <input type="password" class="form-control mb-3" placeholder="Confirm your password" formControlName="repassReg">
+    <!-- Errores de validación -->
+    <div *ngIf="forma.controls['repassReg'].errors?.nocoindicen && !forma.controls['repassReg'].pristine"
+      class="form-control-feedback">
+      Las contraseñas no coinciden.
+    </div>
+    <div *ngIf="forma.controls['repassReg'].errors?.novacio && !forma.controls['repassReg'].pristine"
+      class="form-control-feedback">
+      El campo no puede estar vacío.
+    </div>
+
+    <!-- Sign in button -->
+    <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!forma.valid">Update info</button>
+
+  </form>
+</div>
+
+<div class="container mt-5 mb-5" style="width:600px;">
+  <form class="text-center border border-light p-5">
+
+      <p class="h4 mb-4">Liked movies</p>
+
+    <div class="list-group" *ngFor="let like of likes;">
+      <a [routerLink]="['/movie', like.id]" class="list-group-item list-group-item-action waves-light" mdbWavesEffect>{{like.title}}</a>
+    </div>
+  </form>
+</div>
