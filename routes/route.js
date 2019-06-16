@@ -90,8 +90,8 @@ Filtrar por:
 */
 router.post('/searchMovies', (req, res) => {
     console.log("POST");
-    let imdbRatingNumber = "Select"
-    if(req.body.imdb != "Select"){
+    let imdbRatingNumber = "IMDBRating";
+    if(req.body.imdb != "IMDBRating"){
         imdbRatingNumber = parseFloat(req.body.imdb)
     }
     let query = {
@@ -110,21 +110,21 @@ router.post('/searchMovies', (req, res) => {
         console.log("Title: " + query.title);
         match_query.push( { "title": query.title  } )
     }
-    if(query.genre != 'Select'){
+    if(query.genre != 'Genre'){
         console.log("Genre: " + query.genre);
         match_query.push( { "genres":{ $in :[ query.genre ]}} )
     }
     
-    if(query.year != "Select"){
+    if(query.year != "Year"){
         console.log("Year: " + query.year);
         match_query.push( { "year": query.year } )
     }
     
-    if(query.actor != "Select"){
+    if(query.actor != "Actor"){
         match_query.push( { "actors": query.actor } )
     }
     
-    if(query.imdbRating != "Select"){
+    if(query.imdbRating != "IMDBRating"){
         console.log("Imbd: " + query.imdbRating);
         match_query.push({ "imdbRating": { $gte: query.imdbRating } })
     }
