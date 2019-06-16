@@ -52,11 +52,15 @@ export class MoviesComponent implements OnInit {
   }
 
   applyFilter(textToFilter:String){
-    //console.log(textToFilter);
-    let genreSelected = document.getElementById("genresID").options[document.getElementById("genresID").selectedIndex].value);
-    let yearSelected = document.getElementById("yearsID").options[document.getElementById("yearsID").selectedIndex].value);
-    let actorSelected = document.getElementById("actorsID").options[document.getElementById("actorsID").selectedIndex].value);
-    let imdbRatingSelected = document.getElementById("imdbratingID").options[document.getElementById("imdbratingID").selectedIndex].value);
+    let genreSelectedElement = document.getElementById("genresID") as HTMLSelectElement;
+    let yearSelectedElement = document.getElementById("yearsID") as HTMLSelectElement;
+    let actorSelectedElement = document.getElementById("actorsID") as HTMLSelectElement;
+    let imdbSelectedElement = document.getElementById("imdbratingID") as HTMLSelectElement;
+    
+    let genreSelected = genreSelectedElement.options[genreSelectedElement.selectedIndex].value;
+    let yearSelected = yearSelectedElement.options[yearSelectedElement.selectedIndex].value;
+    let actorSelected = actorSelectedElement.options[actorSelectedElement.selectedIndex].value;
+    let imdbRatingSelected = imdbSelectedElement.options[imdbSelectedElement.selectedIndex].value;
     if(textToFilter != ""  || yearSelected != "Select" || genreSelected != "Select" || actorSelected != "Select" || imdbRatingSelected != "Select"){
       console.log("Entrando");
       this._moviesServ.getMoviesSearched(textToFilter, genreSelected, yearSelected, actorSelected, imdbRatingSelected).subscribe((datos) => {
