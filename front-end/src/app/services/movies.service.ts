@@ -9,6 +9,10 @@ export class MoviesService {
 
     apiroute = "http://localhost:3000/api";
     movies = [];
+    genres = [];
+    actors = [];
+    years = [];
+    imdbRatings = [];
 
     constructor(private http: HttpClient) {
     }
@@ -17,6 +21,7 @@ export class MoviesService {
     getMoviesDB(): any {
         let url = `${this.apiroute}/movies`;
         let body: any;
+        this.movies = [];
         return this.http.get(url, { observe: 'response' }).pipe(
             map(resp => {
                 console.log(resp);
@@ -32,6 +37,116 @@ export class MoviesService {
                         })
                     }
                     return this.movies;
+                }
+            })
+        )
+    }
+
+    //Función para obtener la lista filtrada
+    getMoviesSearched(title:String, genre:String, year:String, actor:String, imdb:String): any {
+        console.log("getMoviesSearched");
+        let datos = {
+            title:title,
+            genre:genre,
+            year:year,
+            actor:actor,
+            imdb:imdb,
+        };
+        console.log(datos);
+        let url = `${this.apiroute}/searchMovies`;
+        let respMovies : any;
+        let body = JSON.stringify(datos);
+        this.movies = [];
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+        });
+        console.log("Empezando");
+        return this.http.post(url, body, {headers, observe: 'response' }).pipe(
+            map(resp => {
+                console.log("Log Resp");
+                console.log(resp);
+                if (resp.ok) {
+                    respMovies = resp.body;
+                    for (let movie of respMovies) {
+                        this.checkPoster(movie.posterurl).subscribe((resp) => {
+                        }, error => {
+                            if (error.status != 200) {
+                                movie.posterurl = 'assets/noposter.jpg';
+                            }
+                            this.movies.push(movie);
+                        })
+                    }
+                    
+                    return this.movies;
+                }
+            })
+        )
+    }
+
+    getGenres(): any {
+        let url = `${this.apiroute}/genres`;
+        let body: any;
+        this.movies = [];
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                if (resp.ok) {
+                    body = resp.body;
+                    for (let genre of body) {
+                        this.genres.push(genre);
+                    }
+                    return this.genres;
+                }
+            })
+        )
+    }
+    getActors(): any {
+        let url = `${this.apiroute}/actors`;
+        let body: any;
+        this.movies = [];
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                if (resp.ok) {
+                    body = resp.body;
+                    for (let actor of body) {
+                        this.actors.push(actor);
+                    }
+                    return this.actors;
+                }
+            })
+        )
+    }
+    getYears(): any {
+        let url = `${this.apiroute}/years`;
+        let body: any;
+        this.movies = [];
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                if (resp.ok) {
+                    body = resp.body;
+                    for (let year of body) {
+                        this.years.push(year);
+                    }
+                    return this.years;
+                }
+            })
+        )
+    }
+    getImdbRatings(): any {
+        let url = `${this.apiroute}/imdbRatings`;
+        let body: any;
+        this.movies = [];
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                if (resp.ok) {
+                    body = resp.body;
+                    for (let imdbRating of body) {
+                        this.imdbRatings.push(imdbRating);
+                    }
+                    return this.imdbRatings;
                 }
             })
         )

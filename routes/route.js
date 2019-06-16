@@ -48,7 +48,7 @@ router.post('/movie', (req, res, next) => {
 
 });
 
-// Get all genres
+// Get all actors
 router.get('/actors', (req, res) => {
     //res.send('Retrieving movie list');
     Movie.distinct("actors", (err, movies) => {
@@ -57,10 +57,24 @@ router.get('/actors', (req, res) => {
 });
 
 
-// Get all year
+// Get all genres
 router.get('/genres', (req, res) => {
     //res.send('Retrieving movie list');
     Movie.distinct("genres", (err, movies) => {
+        res.json(movies);
+    })
+});
+
+// Get all years
+router.get('/years', (req, res) => {
+    //res.send('Retrieving movie list');
+    Movie.distinct("year", (err, movies) => {
+        res.json(movies);
+    })
+});
+router.get('/imdbRatings', (req, res) => {
+    //res.send('Retrieving movie list');
+    Movie.distinct("imdbRating", (err, movies) => {
         res.json(movies);
     })
 });
@@ -74,37 +88,48 @@ Filtrar por:
     year
     imdbrating
 */
-router.get('/searchMovies', (req, res, next) => {
+router.post('/searchMovies', (req, res) => {
+    console.log("POST");
+    let imdbRatingNumber = "Select"
+    if(req.body.imdb != "Select"){
+        imdbRatingNumber = parseFloat(req.body.imdb)
+    }
     let query = {
-        /*
+        
         title: req.body.title,
+        genre: req.body.genre,
         year: req.body.year,
-        genres: req.body.genres,
-        actors: req.body.actors,
-        imdbRating: req.body.imdbRating
-        */
+        actor: req.body.actor,
+        imdbRating: imdbRatingNumber
     };
 
     let match_query = []
     // Check query inputs
-    /*
-    if(query.title != undefined){
-        match_query.push( { "title": { $gte: 7 } } )
+    
+    if(query.title != ''){
+        console.log("Title: " + query.title);
+        match_query.push( { "title": query.title  } )
     }
-    if(query.year != undefined){
-        match_query.push( { "year": { $gte: 7 } } )
+    if(query.genre != 'Select'){
+        console.log("Genre: " + query.genre);
+        match_query.push( { "genres":{ $in :[ query.genre ]}} )
     }
-    if(query.genres != undefined){
-        match_query.push( { "genres": { $gte: 7 } } )
+    
+    if(query.year != "Select"){
+        console.log("Year: " + query.year);
+        match_query.push( { "year": query.year } )
     }
-    if(query.actors != undefined){
-        match_query.push( { "actors": { $gte: 7 } } )
+    
+    if(query.actor != "Select"){
+        match_query.push( { "actors": query.actor } )
     }
-    if(query.imdbRating != undefined){
-        match_query.push( { "imdbRating": { $gte: 7 } } )
+    
+    if(query.imdbRating != "Select"){
+        console.log("Imbd: " + query.imdbRating);
+        match_query.push({ "imdbRating": { $gte: query.imdbRating } })
     }
-    */
-    match_query.push({ "imdbRating": { $gte: 7 } })
+    console.log("Query");
+    console.log(match_query);
 
     let pipeline = [
         {

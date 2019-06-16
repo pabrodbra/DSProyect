@@ -37,7 +37,7 @@ import { MoviePageComponent } from './components/movie-page/movie-page.component
     SignupComponent,
     UrlInvalidPipe,
     MoviePageComponent,
-    ActorsComponent
+    ActorsComponent,
   ],
   imports: [
     BrowserModule,

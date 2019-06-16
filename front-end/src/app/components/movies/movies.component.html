@@ -1,14 +1,22 @@
 <h1 style="text-align:center;"> Movies </h1>
+<div class="searchInputFields">
+  Name Search: <input type="text" class="inputTitle" name="fname" #filterInput>
+  Genres: <select id="genresID" class="searchInputs" ><option>Select</option> <option  #genreValue *ngFor="let genre of genres;">{{ genre }}</option></select>
+  Years: <select id="yearsID" class="searchInputs" ><option>Select</option><option  #genreValue *ngFor="let year of years;">{{ year }}</option></select>
+  Actors: <select id="actorsID" class="searchInputs" ><option>Select</option><option  #genreValue *ngFor="let actor of actors;">{{ actor }}</option></select>
+  Imdbrating: <select id="imdbratingID" class="searchInputs" ><option>Select</option><option  #genreValue *ngFor="let imdR of imdbRatings;">{{ imdR }}</option></select>
+</div>
+<div class="buttonFilters"><a mdbBtn  class="" gradient="purple" mdbWavesEffect (click)="applyFilter(filterInput.value)">Apply Filters</a></div>
 <hr>
 
 <div class="container">
   <div class="card-columns">
+    
     <div class="card" *ngFor="let movie of movies;">
-      
       <img class="card-img-top" [src]="movie.posterurl" [alt]="movie.title">
 
       <div class="card-body">
-        <p class="h6"> {{ movie.title }} </p>
+        <p class="h6"> {{ movie.title }} </p><br>
         <div class="row">
             <a [routerLink]="['/movie', movie._id]" mdbBtn  gradient="purple" rounded="true" class="rounded" mdbWavesEffect>More</a>
             <a class="btn peach-gradient rounded" (click)="addLike(movie._id,movie.title)">Like</a>
