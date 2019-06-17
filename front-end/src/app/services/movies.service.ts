@@ -100,6 +100,7 @@ export class MoviesService {
             })
         )
     }
+    
     getActors(): any {
         let url = `${this.apiroute}/actors`;
         let body: any;
@@ -117,6 +118,7 @@ export class MoviesService {
             })
         )
     }
+
     getYears(): any {
         let url = `${this.apiroute}/years`;
         let body: any;
@@ -218,5 +220,35 @@ export class MoviesService {
                     return resp;
                 })
             )
+    }
+
+    getNeoActors(): any {
+        //console.log("Url: " + url );
+        let url = `${this.apiroute}/neo4j/actors`;
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                return resp; //Will fail, but we handle the error on the component
+            })
+        )
+    }
+
+    getCoactors(name:String): any{
+        let url = `${this.apiroute}/neo4j/coactors/${name}`;
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                return resp; //Will fail, but we handle the error on the component
+            })
+        )
+    }
+
+    getDirectedActor(name:String): any{
+        let url = `${this.apiroute}/neo4j/directedactor/${name}`;
+        return this.http.get(url, { observe: 'response' }).pipe(
+            map(resp => {
+                console.log(resp);
+                return resp; //Will fail, but we handle the error on the component
+            })
+        )
     }
 }

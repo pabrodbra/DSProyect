@@ -108,7 +108,7 @@ router.post('/searchMovies', (req, res) => {
     
     if(query.title != ''){
         console.log("Title: " + query.title);
-        match_query.push( { "title": query.title  } )
+        match_query.push( { "title":{ "$regex": query.title, $options: '-i' }  } )
     }
     if(query.genre != 'Genre'){
         console.log("Genre: " + query.genre);

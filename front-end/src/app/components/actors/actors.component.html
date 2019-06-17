@@ -1,3 +1,10 @@
-<p>
-  actors works!
-</p>
+<div class="container mt-5 mb-5" style="width:600px;">
+  <form class="text-center border border-light p-5">
+
+      <p class="h4 mb-4">Actors List</p>
+
+    <div class="list-group" *ngFor="let actor of actors;">
+      <a [routerLink]="['/actor', actor]" class="list-group-item list-group-item-action waves-light" mdbWavesEffect>{{actor}}</a>
+    </div>
+  </form>
+</div>

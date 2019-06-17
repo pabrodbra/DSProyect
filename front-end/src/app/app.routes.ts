@@ -5,6 +5,7 @@ import { LoginComponent } from './components/log/login/login.component';
 import { SignupComponent } from './components/log/signup/signup.component';
 import { MoviePageComponent } from './components/movie-page/movie-page.component';
 import { ActorsComponent } from './components/actors/actors.component';
+import { ActorComponent } from './components/actor/actor.component';
 
 const app_routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -13,6 +14,7 @@ const app_routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'actors', component: ActorsComponent },
+  { path: 'actor/:name', component: ActorComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'movies' }
 ];
 

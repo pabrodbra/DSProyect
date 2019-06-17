@@ -24,6 +24,7 @@ import { APP_ROUTING } from './app.routes';
 //PiPES
 import { UrlInvalidPipe } from './pipes/urlinvalid.pipe';
 import { MoviePageComponent } from './components/movie-page/movie-page.component';
+import { ActorComponent } from './components/actor/actor.component';
 
 
 
@@ -38,6 +39,7 @@ import { MoviePageComponent } from './components/movie-page/movie-page.component
     UrlInvalidPipe,
     MoviePageComponent,
     ActorsComponent,
+    ActorComponent,
   ],
   imports: [
     BrowserModule,
